@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--This is heading banner creation todo style-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+<!--            class=banner is userdefined....his can be added as a style in css in static-->
+            <div class="banner">
+<!--                class=banner-text is userdefined....his can be added as a style in css in static-->
+                <div class="banner-text">
+                    <H1>To Do</H1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        <form method="post" class="p-3 shadow">
+          {% csrf_token %}
+
+            <div class="form-group">
+        <input type="text" class="form-control" name="task" placeholder="Enter task name:">
+            </div>
+
+<div class="form-group">
+        <input type="text" class="form-control" name="priority" placeholder="Enter priority:">
+</div>
+            <div class="form-group">
+        <input type="date" class="form-control" name="date" placeholder="Enter date:">
+</div>
+
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success">
+        </div>
+
+        </form>
+
+
+
+
+    </div>
+
+
+
+
+        <div class="col-md-6">
+            <h3>Completed tasks</h3>
+            {% for i in task1 %}
+            <div class="shadow card">
+                <div class="card-body">
+                    <h5 class="card-title"> <b>{{i.name}}</b></h5>
+                    <p><b>{{i.priority}}</b></p>
+                    <p><b>{{i.date}}</b></p>
+                    <a class="btn btn-danger" href="{% url 'todoapp:delete' i.id %}">DELETE</a>
+                    <a class="btn btn-info" href="{% url 'todoapp:update' i.id %}">UPDATE</a>
+
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+
+
+
+</div>
+</div>
+
+
+
+{% endblock %}
